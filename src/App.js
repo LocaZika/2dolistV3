@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import "./scss/app.scss";
+import "./scss/reset.scss";
+import Header from "./components/Header";
+import ToDo from "./components/ToDo";
+import { Slide, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useTask } from "./services/hooks";
 
 function App() {
+  const [{ isDark }, dispatch] = useTask();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={isDark === false ? "app light" : "app dark"}>
+      <Header />
+      <ToDo />
+      <ToastContainer autoClose={1000} transition={Slide} style={{ fontSize: "1.4rem" }} />
     </div>
   );
 }
